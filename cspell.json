@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "ignorePaths": [
+    "node_modules",
+    ".git/**",
+    ".gitattributes",
+    ".vscode/extensions.json",
+    "pnpm-lock.yaml",
+    "README.md",
+    ".husky",
+    ".editorconfig",
+    ".eslintrc",
+    ".gitignore",
+    "components.json",
+    ".env**",
+    "deploy",
+    "package.json",
+    ".vscode"
+  ],
+  "caseSensitive": false,
+  "dictionaryDefinitions": [
+    {
+      "name": "cspell-words.txt",
+      "path": "./cspell-words.txt",
+      "description": "Custom Dictionary",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["cspell-words.txt"],
+  "import": ["@cspell/dict-ru_ru/cspell-ext.json"],
+  "language": "en,ru",
+  "useGitignore": true,
+  "minWordLength": 3
+}

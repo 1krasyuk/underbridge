@@ -1,0 +1,12 @@
+.env.example
+deploy
+.dockerignore
+node_modules
+README.md
+.git
+.gitignore
+doc
+dist
+test
+docker-compose.yml
+.vscode
