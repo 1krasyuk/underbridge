@@ -22,7 +22,7 @@ export default function Favourites() {
       </p>
       <SearchBar onSearch={handleSearch} className="" />
       <div className="flex-1 container w-2/3 grid gap-4">
-        <div className="grid grid-cols-6 gap-6">
+        <div className="grid grid-cols-6 gap-6 auto-rows-max">
           {filteredClothingData.map((item) => (
             <ClothingItem key={item.id} item={item} />
           ))}

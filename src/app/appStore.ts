@@ -10,7 +10,7 @@ import rootReducer from './rootReducer'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: []
+  whitelist: ['cart']
 }
 
 export function makeStore() {

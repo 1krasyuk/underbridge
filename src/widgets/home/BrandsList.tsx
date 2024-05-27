@@ -69,7 +69,7 @@ const BrandsList: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center select-none">
       <div className="flex">
         {imagePaths.map((imagePath, index) => (
           <div key={index} className="flex flex-col justify-evenly mx-4 my-7">

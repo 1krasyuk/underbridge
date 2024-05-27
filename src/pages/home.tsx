@@ -29,7 +29,7 @@ export default function Home() {
         const querySnapshot = await getDocs(collection(db, 'products'))
         const data: TClothingItem[] = []
         querySnapshot.forEach((doc) => {
-          data.push({ id: parseInt(doc.id), ...doc.data() } as TClothingItem)
+          data.push({ id: doc.id, ...doc.data() } as TClothingItem)
         })
 
         // Получение URL-адресов изображений из Firebase Storage
@@ -52,7 +52,7 @@ export default function Home() {
   }, [db, storage])
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col select-none">
       <Header />
 
       <div className="container w-2/3 flex flex-col mt-7">

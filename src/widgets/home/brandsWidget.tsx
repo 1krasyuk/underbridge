@@ -16,11 +16,11 @@ const CategoriesList: React.FC = () => {
       {/* Используем функцию map для рендеринга каждой картинки */}
 
       {imagePaths.map((imagePath, index) => (
-        <div key={index} className="flex">
+        <div key={index} className="flex mx-2">
           <Link to="/shop">
             <img
               key={imagePath}
-              src={`src/images/home/brands/${imagePath}`}
+              src={`/images/home/brands/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
               className="w-44 rounded-full shadow-lg select-none"
             />

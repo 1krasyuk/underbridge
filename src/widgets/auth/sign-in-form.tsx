@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { useNavigate } from 'react-router-dom'
 
 const formSchema = z.object({
   email: z.string({ required_error: 'Введите почту' }).email().min(2, {
@@ -23,19 +24,9 @@ const formSchema = z.object({
   })
 })
 
-// var user = getAuth().currentUser
-
-// if (user) {
-//   // Пользователь вошел в систему
-//   var uid = user.uid
-//   var email = user.email
-//   console.log// и так далее, в зависимости от того, какие данные о пользователе вы хотите получить
-// } else {
-//   // Пользователь не вошел в систему
-// }
-
 export function SignInForm() {
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,7 +39,7 @@ export function SignInForm() {
       await signInWithEmailAndPassword(auth, values.email, values.password)
       console.log('User signed in successfully!')
       setError(null)
-      // Можно выполнить дополнительные действия после успешного входа, например, перенаправление на другую страницу.
+      navigate('/')
     } catch (error) {
       console.error('Error signing in:', (error as Error).message)
       setError((error as Error).message)
@@ -96,7 +87,9 @@ export function SignInForm() {
             </FormItem>
           )}
         />
-        {error && <p className="text-red-500">{error}</p>}
+        {error && (
+          <p className="text-red-500">Вход не выполнен: Аккаунт не найден. </p>
+        )}
         <Button type="submit" className="w-full">
           Войти
         </Button>

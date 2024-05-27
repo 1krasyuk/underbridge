@@ -1,37 +1,40 @@
 import { useEffect, useState } from 'react'
-import { getFirestore, getDocs, collection } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  where
+} from 'firebase/firestore'
 
-export interface ClothingItem {
-  id: number
-  name: string
-  brand: string
-  imageUrl: string
-  size: string
-  price: string
-}
+import { getStorage } from 'firebase/storage'
+import { TClothingItem } from './ClothingItem'
 
 const useSearchItems = () => {
-  const [clothingData, setClothingData] = useState<ClothingItem[]>([])
+  const [clothingData, setClothingData] = useState<TClothingItem[]>([])
   const [filteredClothingData, setFilteredClothingData] = useState<
-    ClothingItem[]
+    TClothingItem[]
   >([])
   const db = getFirestore()
   const storage = getStorage()
 
-  const searchItems = async (query: string) => {
-    const querySnapshot = await getDocs(collection(db, 'products'))
-    const data: ClothingItem[] = []
+  const searchItems = async (search: string, size?: string) => {
+    const q = size
+      ? query(collection(db, 'products'), where('size', '==', size))
+      : query(collection(db, 'products'))
+    const querySnapshot = await getDocs(q)
+
+    const data: TClothingItem[] = []
     querySnapshot.forEach((doc) => {
-      data.push({ id: parseInt(doc.id), ...doc.data() } as ClothingItem)
+      data.push({ id: doc.id, ...doc.data() } as TClothingItem)
     })
 
     setClothingData(data)
 
     const filteredItems = data.filter((item) => {
       return (
-        (item.name && item.name.toLowerCase().includes(query.toLowerCase())) ||
-        (item.brand && item.brand.toLowerCase().includes(query.toLowerCase()))
+        (item.name && item.name.toLowerCase().includes(search.toLowerCase())) ||
+        (item.brand && item.brand.toLowerCase().includes(search.toLowerCase()))
       )
     })
 

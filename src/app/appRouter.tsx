@@ -10,6 +10,13 @@ import About from '@/pages/about'
 import FAQ from '@/pages/faq'
 import Contacts from '@/pages/contacts'
 import Brands from '@/pages/brands'
+import Delivery from '@/pages/delivery'
+import Admin from '@/pages/admin'
+import AddProduct from '@/pages/addProduct'
+import { AdminGuard } from './AdminGuard'
+import CheckoutPage from '@/pages/checkout'
+import Product from '@/pages/product'
+import NotFound from '@/pages/404'
 
 const appRouter = createBrowserRouter([
   {
@@ -58,8 +65,42 @@ const appRouter = createBrowserRouter([
     errorElement: <div>404</div>
   },
   {
+    element: <Delivery />,
+    path: '/delivery',
+    errorElement: <div>404</div>
+  },
+  {
     element: <Brands />,
     path: '/brands',
+    errorElement: <div>404</div>
+  },
+  {
+    element: (
+      <AdminGuard>
+        <Admin />
+      </AdminGuard>
+    ),
+    path: '/admin',
+    errorElement: <div>404</div>
+  },
+  {
+    element: <AddProduct />,
+    path: '/AddProduct',
+    errorElement: <div>404</div>
+  },
+  {
+    element: <CheckoutPage />,
+    path: '/checkout',
+    errorElement: <div>404</div>
+  },
+  {
+    element: <Product />,
+    path: '/product/:id',
+    errorElement: <div>404</div>
+  },
+  {
+    element: <NotFound />,
+    path: '*',
     errorElement: <div>404</div>
   }
 ])
