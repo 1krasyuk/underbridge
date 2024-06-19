@@ -7,7 +7,6 @@ const imagePaths = [
   './image4.jpg',
   './image5.jpg',
   './image6.jpg'
-  // Добавьте пути к другим картинкам по мере необходимости
 ]
 
 const CategoryName = [
@@ -17,28 +16,24 @@ const CategoryName = [
   'Сумки',
   'Аксессуары',
   'Обувь'
-  // Добавьте описания к другим картинкам по мере необходимости
 ]
 
 const CategoriesList: React.FC = () => {
   return (
-    <div className="flex justify-between">
-      {/* Используем функцию map для рендеринга каждой картинки */}
-
+    <div className="grid sm:grid-cols-3 grid-cols-6 gap-3 mb-12">
       {imagePaths.map((imagePath, index) => (
-        <div key={index} className="flex flex-col items-center mx-1">
+        <div key={index} className=" text-center">
           <Link to="/shop">
-            {' '}
             <img
               key={imagePath}
               src={`/images/home/categories/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
-              className="h-64 w-52 mb-4  object-cover select-none"
+              className="h-64 w-52 mb-4 object-cover"
             />
           </Link>
 
           <Link to="/shop">
-            <span className="text-lg font-semibold tracking-tight">
+            <span className="text-lg  font-semibold tracking-tight">
               {CategoryName[index]}
             </span>
           </Link>

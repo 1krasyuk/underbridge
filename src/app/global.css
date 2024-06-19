@@ -25,4 +25,7 @@
     --ring: 240 5.9% 10%;
     --radius: 0;
   }
+  html {
+    user-select: none;
+  }
 }

@@ -76,7 +76,7 @@ const BrandsList: React.FC = () => {
             <Link to="/shop">
               <img
                 key={imagePath}
-                src={`src/images/home/brands/${imagePath}`}
+                src={`public/images/home/brands/${imagePath}`}
                 alt={`Картинка ${index + 1}`}
                 className="w-40  shadow-lg"
               />

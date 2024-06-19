@@ -1,5 +1,3 @@
-import Header from '@/layout/header/header'
-import Footer from '@/layout/footer/footer'
 import { Button } from '@/components/ui/button'
 import { addCartItem, deleteCartItem, selectCartItems } from '@/store/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/lib'
@@ -12,9 +10,27 @@ import {
   DocumentData,
   QueryDocumentSnapshot
 } from 'firebase/firestore'
-import { db } from 'firebase' // Замените на ваш файл конфигурации Firebase
+import { db } from 'firebase'
 import { useEffect, useState } from 'react'
 import { TClothingItem } from '@/widgets/home/ClothingItem'
+import { Heart } from 'lucide-react'
+import LikeButton from '@/widgets/home/LikeButton'
+import {
+  selectFavouriteItems,
+  addFavouriteItem,
+  deleteFavouriteItem
+} from '@/store/favouriteSlice'
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
+import { toast } from 'sonner'
+
+import { cx } from 'class-variance-authority'
 
 export default function Product() {
   const dispatch = useAppDispatch()
@@ -30,6 +46,8 @@ export default function Product() {
   const cartItems = useAppSelector(selectCartItems)
 
   const isInCart = cartItems.find((item) => item.id === id)
+
+  const favouriteItems = useAppSelector(selectFavouriteItems)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,56 +66,112 @@ export default function Product() {
           color: data.color,
           brand: data.brand,
           isLiked: data.IsLiked,
-          ImgURL: data.ImgURL
+          ImgURL: data.ImgURL,
+          description: data.description
         })
       })
       setProduct(products[0])
       setIsLoading(false)
-
-      //   console.log(querySnapshot)
-      //     const doc = Object.entries(
-      //       querySnapshot
-      //     )[0] as unknown as QueryDocumentSnapshot<DocumentData, DocumentData>
-      //     const data = doc.data()
-      //     setProduct(data as TClothingItem)
-      //     setIsLoading(false)
     }
 
     fetchData().catch(() => setIsError(true))
   }, [])
 
-  console.log(product)
-
   if (isLoading) {
     return <p className="">ЗАГРУЗКА...</p>
   }
 
+  console.log(product)
   if (isError || !product) {
     return <p>404</p>
   }
 
-  return (
-    <div className="h-screen flex flex-col ">
-      <Header />
+  const isLiked = favouriteItems.find((item) => item.id === product.id)
+  const likeHandler = () => {
+    if (isLiked) {
+      dispatch(deleteFavouriteItem(product.id))
+      toast('Товар удален из избранного')
+    } else {
+      dispatch(addFavouriteItem(product))
+      toast('Товар добавлен в избранное')
+    }
+  }
 
-      {isInCart ? (
-        <Button
-          type="submit"
-          className="m-auto w-48"
-          onClick={() => dispatch(deleteCartItem(product.id))}
-        >
-          Удалить из корзины
-        </Button>
-      ) : (
-        <Button
-          type="submit"
-          className="m-auto w-48"
-          onClick={() => dispatch(addCartItem(product))}
-        >
-          Добавить в корзину
-        </Button>
-      )}
-      <Footer />
+  return (
+    <div className="grid grid-cols-[2.5fr_1fr] container w-2/3 mt-28">
+      <div className="flex justify-center">
+        <Carousel>
+          <CarouselContent>
+            <CarouselItem className="  ">
+              <img
+                src={product.ImgURL}
+                alt={product.name}
+                className="w-full h-[550px]  object-cover  select-none"
+              />
+            </CarouselItem>
+            {/* <CarouselItem>..lfkjhgofdlgdf.</CarouselItem>
+            <CarouselItem>...</CarouselItem> */}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      <div className="flex flex-col mt-10  ">
+        <div className="tracking-wide text-2xl font-semibold  underline mb-8">
+          {product.name}
+        </div>
+        <div className="space-y-2 mb-8">
+          <div className="tracking-wide text-xl   ">Бренд: {product.brand}</div>
+          <div className="tracking-wide text-xl   ">Размер: {product.size}</div>
+          <div className="tracking-wide text-xl  ">Цвет: {product.color}</div>
+          <div className="tracking-wide text-xl  ">{product.description}</div>
+        </div>
+        <div className="tracking-wide text-xl font-bold mb-5 text-red-500 ">
+          ₽ {product.price}
+        </div>
+        <div className="flex flex-row">
+          {isInCart ? (
+            <Button
+              type="submit"
+              className=" w-full h-12 uppercase"
+              onClick={() => {
+                dispatch(deleteCartItem(product.id))
+                toast('Товар удален из корзины')
+              }}
+            >
+              Удалить из корзины
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              className=" w-full h-12 uppercase"
+              onClick={() => {
+                dispatch(addCartItem(product))
+                toast('Товар добавлен в корзину')
+              }}
+            >
+              Добавить в корзину
+            </Button>
+          )}
+
+          <Button
+            variant="outline"
+            className={cx(
+              'h-12 w-max border-5   border-black hover:border-red-500 hover:bg-white',
+              {
+                ['border-red-500']: isLiked
+              }
+            )}
+            onClick={likeHandler}
+          >
+            <Heart
+              size={30}
+              strokeWidth={1.5}
+              className={
+                isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-black-500'
+              }
+            />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

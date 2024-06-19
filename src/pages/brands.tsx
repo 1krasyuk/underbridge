@@ -5,13 +5,11 @@ import BrandsList from '@/widgets/home/BrandsList'
 
 export default function Cart() {
   return (
-    <div className="flex flex-col">
-      <Header />
-      <p className="tracking-wide text-3xl font-bold uppercase mx-auto mt-10">
+    <div>
+      <p className="tracking-wide text-3xl font-bold uppercase mx-auto mt-10 text-center">
         Бренды и дизайнеры
       </p>
       <BrandsList />
-      <Footer />
     </div>
   )
 }

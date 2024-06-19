@@ -2,18 +2,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { string, z } from 'zod'
 import { initializeApp } from 'firebase/app'
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail
-} from 'firebase/auth'
 import { getFirestore, doc, setDoc } from 'firebase/firestore' // Импорт необходимых функций Firestore
-
+import { nanoid } from '@reduxjs/toolkit'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { useAppDispatch } from '@/lib'
+import { clearCart } from '@/store/cartSlice'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,8 +20,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
-import { setDefaultAutoSelectFamily } from 'net'
-import { createEntityAdapter } from '@reduxjs/toolkit'
+import { useNavigate } from 'react-router-dom'
 
 // Инициализация вашего Firebase проекта
 const firebaseConfig = {
@@ -53,65 +49,21 @@ async function addOrderDataToFirestore(
 ) {
   try {
     const db = getFirestore() // Получаем доступ к Firestore
-    const userRef = doc(db, 'orders', email) // Создаем ссылку на документ пользователя
+    const userRef = doc(db, 'orders', nanoid()) // Создаем ссылку на документ пользователя
     await setDoc(userRef, {
-      email: email,
-      country: country,
-      name: name,
-      lastname: lastname,
-      adress: adress,
-      city: city,
-      postalCode: string,
-      phoneNumber: string,
-      deliveryMethod: string
+      email,
+      country,
+      name,
+      lastname,
+      adress,
+      city,
+      postalCode,
+      phoneNumber,
+      deliveryMethod
     }) // Устанавливаем данные пользователя в Firestore
     console.log('Order data added to Firestore successfully!')
   } catch (error) {
     console.error('Error adding order data to Firestore:', error)
-  }
-}
-
-async function createOrder(
-  email: string,
-  country: string,
-  name: string,
-  lastname: string,
-  adress: string,
-  city: string,
-  postalCode: string,
-  phoneNumber: string,
-  deliveryMethod: string
-) {
-  console.log('Order was created via email:', email)
-  try {
-    const auth = getAuth()
-    await createOrder(
-      email,
-      country,
-      name,
-      lastname,
-      adress,
-      city,
-      postalCode,
-      phoneNumber,
-      deliveryMethod
-    )
-    await addOrderDataToFirestore(
-      email,
-      country,
-      name,
-      lastname,
-      adress,
-      city,
-      postalCode,
-      phoneNumber,
-      deliveryMethod
-    ) // Добавляем данные пользователя в Firestore
-    console.log('Order registered successfully!')
-    // Можно выполнить дополнительные действия после успешной регистрации, например, перенаправление на другую страницу.
-  } catch (error) {
-    console.error('Error registering order:', (error as Error).message)
-    // Обработка ошибки, например, отображение сообщения об ошибке пользователю.
   }
 }
 
@@ -150,26 +102,55 @@ const formSchema = z.object({
 
 export function CheckoutForm() {
   // 1. Define your form.
+  const dispatch = useAppDispatch()
+
+  const navigate = useNavigate()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {}
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit({
+    email,
+    country,
+    name,
+    lastname,
+    adress,
+    city,
+    postalCode,
+    phoneNumber,
+    deliveryMethod
+  }: z.infer<typeof formSchema>) {
     // addOrderwithE
-    createOrder(
-      values.email,
-      values.country,
-      values.name,
-      values.lastname,
-      values.adress,
-      values.city,
-      values.postalCode,
-      values.phoneNumber,
-      values.deliveryMethod
-    )
-    console.log(values)
+    {
+      console.log('Order was created via email:', email)
+      try {
+        await addOrderDataToFirestore(
+          email,
+          country,
+          name,
+          lastname,
+          adress,
+          city,
+          postalCode,
+          phoneNumber,
+          deliveryMethod
+        ) // Добавляем данные пользователя в Firestore
+        console.log('Order registered successfully!')
+        toast('Заказ успешно оформлен')
+        navigate('/')
+        dispatch(clearCart())
+        // Можно выполнить дополнительные действия после успешной регистрации, например, перенаправление на другую страницу.
+      } catch (error) {
+        console.error('Error registering order:', (error as Error).message)
+        toast('При оформлении заказа произошла ошибка')
+        // Обработка ошибки, например, отображение сообщения об ошибке пользователю.
+      }
+    }
+
+    form.reset()
   }
 
   return (
@@ -186,9 +167,6 @@ export function CheckoutForm() {
 
               <FormControl>
                 <Input
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
-
                   type="email"
                   placeholder="Email"
                   defaultValue={field.value || ''}
@@ -213,6 +191,7 @@ export function CheckoutForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Имя</FormLabel>
                 <FormControl>
                   <Input
                     type="name"
@@ -234,6 +213,7 @@ export function CheckoutForm() {
             name="lastname"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Фамилия</FormLabel>
                 <FormControl>
                   <Input
                     type="lastname"
@@ -242,9 +222,7 @@ export function CheckoutForm() {
                     onChange={field.onChange}
                   />
                 </FormControl>
-                {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
+                {/* <FormDescription>Фамилия</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -256,6 +234,8 @@ export function CheckoutForm() {
           name="country"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Страна</FormLabel>
+
               <FormControl>
                 <Input
                   type="country"
@@ -278,6 +258,8 @@ export function CheckoutForm() {
             name="postalCode"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Почтовый код</FormLabel>
+
                 <FormControl>
                   <Input
                     type="postalCode"
@@ -299,6 +281,8 @@ export function CheckoutForm() {
             name="city"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Город</FormLabel>
+
                 <FormControl>
                   <Input
                     type="city"
@@ -321,6 +305,8 @@ export function CheckoutForm() {
           name="adress"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Адрес</FormLabel>
+
               <FormControl>
                 <Input
                   // value={email}
@@ -345,6 +331,8 @@ export function CheckoutForm() {
           name="phoneNumber"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Номер телефона</FormLabel>
+
               <FormControl>
                 <Input
                   // value={password}
@@ -408,7 +396,7 @@ export function CheckoutForm() {
         />
 
         <Button type="submit" className="w-full">
-          Проверить данные
+          Оформить заказ
         </Button>
       </form>
     </Form>

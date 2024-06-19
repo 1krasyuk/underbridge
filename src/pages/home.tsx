@@ -52,61 +52,55 @@ export default function Home() {
   }, [db, storage])
 
   return (
-    <div className="h-screen flex flex-col select-none">
-      <Header />
+    <div className=" sm:w-full container w-2/3 flex flex-col mt-7">
+      <div className="">
+        <p className=" my-4 text-left tracking-wide  text-base font-medium uppercase">
+          Категории
+        </p>
 
-      <div className="container w-2/3 flex flex-col mt-7">
-        <div className="">
-          <p className="my-4 text-left tracking-wide text-base font-medium uppercase">
-            Категории
-          </p>
-
-          <CategoriesList />
-        </div>
-
-        <div>
-          <div className="mt-10 flex justify-between">
-            <p className="my-4 text-left tracking-wide text-base font-medium uppercase">
-              Бренды и дизайнеры
-            </p>
-
-            <Link to="/brands">
-              <p className="my-4 text-left tracking-wide text-base font-medium text-red-500">
-                Остальные
-              </p>
-            </Link>
-          </div>
-
-          <BrandsList />
-        </div>
-
-        <div>
-          <div className="mt-10 flex justify-between">
-            <p className="my-4 text-left tracking-wide text-base font-medium uppercase">
-              Новинки
-            </p>
-            <Link to="/shop">
-              <p className="my-4 text-left tracking-wide text-base font-medium text-red-500">
-                Остальные
-              </p>
-            </Link>
-          </div>
-
-          <Carousel className="w-full ">
-            <CarouselContent>
-              {clothingData.map((item) => (
-                <CarouselItem className="basis-1/6" key={item.id}>
-                  <ClothingItem item={item} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        </div>
+        <CategoriesList />
       </div>
 
-      <Footer />
+      <div>
+        <div className=" flex justify-between">
+          <p className=" sm:tracking-tight my-4 text-left tracking-wide text-base font-medium uppercase">
+            Бренды и дизайнеры
+          </p>
+
+          <Link to="/brands">
+            <p className="my-4 text-left tracking-wide text-base font-medium text-red-500">
+              Остальные
+            </p>
+          </Link>
+        </div>
+
+        <BrandsList />
+      </div>
+
+      <div>
+        <div className=" mt-10 flex justify-between">
+          <p className="sm:my-0 sm:tracking-tight sm:text-2xl my-4 text-left tracking-wide text-base font-medium uppercase">
+            Новинки
+          </p>
+          <Link to="/shop">
+            <p className="my-4 text-left tracking-wide text-base font-medium text-red-500">
+              Остальные
+            </p>
+          </Link>
+        </div>
+
+        <Carousel className=" w-full ">
+          <CarouselContent className="">
+            {clothingData.map((item) => (
+              <CarouselItem className=" basis-1/6 ml-2" key={item.id}>
+                <ClothingItem item={item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
     </div>
   )
 }

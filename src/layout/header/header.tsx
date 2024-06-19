@@ -60,14 +60,14 @@ export default function Header() {
 
   return (
     <div className="container w-2/3 flex flex-col uppercase select-none">
-      <div className="flex-row justify-between">
+      <div className="flex flex-row justify-between">
         <Link to="/">
-          <p className="font-bold tracking-widest text-3xl my-2 text-red-500">
+          <p className="font-bold  tracking-widest sm:text-2xl text-3xl my-2 text-red-500">
             UNDERBRIDGE
           </p>
         </Link>
 
-        <div className="flex-row justify-between items-center space-x-5 ">
+        <div className="flex flex-row justify-between items-center space-x-5 ">
           <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
             <DialogTrigger>
               <Search
@@ -130,9 +130,9 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="flex-row justify-between border-y-2 tracking-widest text-sm font-bold ">
+      <div className="flex flex-row justify-between border-y-2 tracking-widest text-sm font-bold ">
         <p className="my-4 text-right  ">
-          <Link to="/shop"> Бренды </Link>
+          <Link to="/brands"> Бренды </Link>
         </p>
         <p className="my-4 text-right  ">
           <Link to="/shop"> Мужское </Link>

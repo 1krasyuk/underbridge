@@ -2,11 +2,14 @@ import { Input } from '@/components/ui/input'
 import { CheckoutForm } from '@/widgets/home/CheckoutForm'
 import { Heart, Search, ShoppingBag, User as UserIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
+import { useAppSelector } from '@/lib'
+import { selectCartItems } from '@/store/cartSlice'
 import Footer from '@/layout/footer/footer'
 import { Link } from 'react-router-dom'
 
 export default function CheckoutPage() {
+  const cartItems = useAppSelector(selectCartItems)
+
   return (
     <div className="  flex flex-col bg-gradient-to-r from-white from-50% to-gray-100 to-50%">
       <div className="bg-white">
@@ -36,27 +39,32 @@ export default function CheckoutPage() {
       </div>
       <hr></hr>
 
-      <div className="container grid grid-cols-2 ">
-        <div className=" w-11/12">
+      <div className="container grid grid-cols-2  justify-center ">
+        <div className="pr-10">
           <h1 className="text-4xl font-semibold my-8 tracking-wider text-center">
             Быстрая оплата
           </h1>
 
           <CheckoutForm />
 
-          <p className="my-4 tracking-tight text-base font-medium">
+          <p className="my-4 tracking-tight text-base font-medium ">
             Уже есть аккаунт?
             <Link
               to="/sign-in"
-              className="underline decoration-solid underline-offset-4 ml-1"
+              className="underline decoration-solid underline-offset-4 ml-1 "
             >
               Войти
             </Link>
           </p>
         </div>
-
-        <div className=" ">
-          <p>PDSOGPSPG</p>
+        <div>
+          {cartItems.map((item) => (
+            <img
+              src={item.ImgURL}
+              alt={item.name}
+              className="ml-10 h-32 w-24 object-cover my-4"
+            />
+          ))}
         </div>
       </div>
     </div>

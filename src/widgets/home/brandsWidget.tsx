@@ -7,22 +7,21 @@ const imagePaths = [
   './image4.png',
   './image5.png',
   './image6.png'
-  // Добавьте пути к другим картинкам по мере необходимости
 ]
 
 const CategoriesList: React.FC = () => {
   return (
-    <div className="flex justify-between">
+    <div className="grid sm:order-3 grid-cols-6 gap-4 mb-6">
       {/* Используем функцию map для рендеринга каждой картинки */}
 
       {imagePaths.map((imagePath, index) => (
-        <div key={index} className="flex mx-2">
+        <div key={index} className="">
           <Link to="/shop">
             <img
               key={imagePath}
               src={`/images/home/brands/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
-              className="w-44 rounded-full shadow-lg select-none"
+              className="shadow-2xl"
             />
           </Link>
         </div>

@@ -12,6 +12,7 @@ export interface TClothingItem {
   price: string
   isLiked: boolean
   color: string
+  description: string
 }
 
 interface ClothingItemProps {
@@ -20,41 +21,43 @@ interface ClothingItemProps {
 
 const ClothingItem: React.FC<ClothingItemProps> = ({ item }) => {
   return (
-    <Link to={`/product/${item.id}`}>
-      <div className="flex flex-col p-1  w-full h-full border-2 border-transparent transition-all duration-500 hover:border-black ">
-        <div className="w-full h-64 mb-4">
-          <img
-            src={item.ImgURL}
-            alt={item.name}
-            className="w-full h-full object-cover select-none"
-          />
-        </div>
-        <hr></hr>
-        <div className="flex flex-1 mt-2 ">
-          <div className="flex flex-col w-full justify-between ">
-            <div>
-              <div className="flex justify-between ">
-                <p className="tracking-wide text-md font-bold uppercase truncate">
-                  {item.name}
-                </p>
-                <p className="tracking-widest text-md font-semibold uppercase mr-1 select-none">
-                  {item.size}
-                </p>
-              </div>
-              <p className="tracking-widest text-sm font-semibold uppercase">
-                {item.brand}
+    <div className="sm:w-48 flex flex-col p-1 w-full h-full border-2 border-transparent transition-all duration-500 hover:border-black relative">
+      <div className="sm:h-full  w-full h-64 mb-4">
+        <img
+          src={item.ImgURL}
+          alt={item.name}
+          className=" w-full h-full object-cover select-none"
+        />
+      </div>
+      <hr className=" "></hr>
+      <div className="flex flex-1 mt-2 ">
+        <div className="flex flex-col w-full justify-between ">
+          <div>
+            <div className="flex justify-between ">
+              <p className="sm: tracking-wide text-md font-bold uppercase truncate">
+                {item.name}
+              </p>
+              <p className="sm: tracking-widest text-md font-semibold uppercase mr-1 select-none">
+                {item.size}
               </p>
             </div>
-            <div className="flex justify-between items-end">
-              <p className="tracking-wider text-md font-bold uppercase select-none">
-                {item.price} ₽
-              </p>
-              <LikeButton id={item.id} isLiked={item.isLiked} />
-            </div>
+            <p className="sm:text-xl tracking-widest text-sm font-semibold uppercase">
+              {item.brand}
+            </p>
+          </div>
+          <div className="flex justify-between items-end">
+            <p className="sm:text-xl tracking-wider text-md font-bold uppercase select-none">
+              {item.price} ₽
+            </p>
+            <LikeButton cardItem={item} />
           </div>
         </div>
       </div>
-    </Link>
+      <Link
+        to={`/product/${item.id}`}
+        className="absolute w-full h-full top-0 left-0"
+      />
+    </div>
   )
 }
 

@@ -27,22 +27,16 @@ export default function Shop() {
   }
 
   return (
-    <div className="h-screen flex flex-col ">
-      <Header />
-      {/* <SearchBar onSearch={handleSearch} className="mt-10" /> */}
-      <div className="flex-1 container w-2/3 grid grid-cols-[1fr_3fr] gap-4 mt-24">
-        <div>
-          <SizeFilter />
-          <BrandFilter />
-        </div>
-        <div className="grid grid-cols-4 gap-6 auto-rows-max">
-          {filteredClothingData.map((item) => (
-            <ClothingItem key={item.id} item={item} />
-          ))}
-        </div>
+    <div className="flex-1 container w-2/3 grid grid-cols-[1fr_3fr] gap-4 mt-24">
+      <div>
+        <SizeFilter />
+        <BrandFilter />
       </div>
-
-      <Footer />
+      <div className="grid grid-cols-4 gap-6 auto-rows-max">
+        {filteredClothingData.map((item) => (
+          <ClothingItem key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   )
 }
