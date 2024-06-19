@@ -1,11 +1,6 @@
-import Header from '@/layout/header/header'
-import Footer from '@/layout/footer/footer'
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '@/lib'
-import { selectCartItems } from '@/store/cartSlice'
+
 import { Button } from '@/components/ui/button'
-import { useAppDispatch } from '@/lib'
-import { clearCart, deleteCartItem } from '@/store/cartSlice'
 import {
   Table,
   TableBody,
@@ -15,6 +10,10 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import Footer from '@/layout/footer/footer'
+import Header from '@/layout/header/header'
+import { useAppDispatch, useAppSelector } from '@/lib'
+import { clearCart, deleteCartItem, selectCartItems } from '@/store/cartSlice'
 
 export default function Cart() {
   const cartItems = useAppSelector(selectCartItems)
@@ -25,7 +24,7 @@ export default function Cart() {
 
   return (
     <div className="">
-      <div className="  container w-2/3 grid grid-cols-4">
+      <div className="  container grid grid-cols-4">
         <div className="h-28 col-span-3  flex justify-between items-center">
           <p className=" mx-6  text-4xl font-semibold  tracking-wide uppercase ">
             Корзина

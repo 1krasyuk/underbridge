@@ -1,6 +1,8 @@
-import { Button } from '@/components/ui/button'
 import { Heart } from 'lucide-react'
 import { Link } from 'react-router-dom'
+
+import { Button } from '@/components/ui/button'
+
 import LikeButton from './LikeButton'
 
 export interface TClothingItem {
@@ -21,23 +23,23 @@ interface ClothingItemProps {
 
 const ClothingItem: React.FC<ClothingItemProps> = ({ item }) => {
   return (
-    <div className="sm:w-48 flex flex-col p-1 w-full h-full border-2 border-transparent transition-all duration-500 hover:border-black relative">
-      <div className="sm:h-full  w-full h-64 mb-4">
+    <div className="w-48 flex flex-col p-1 h-full border-2 border-transparent transition-all duration-500 hover:border-black relative">
+      <div className="w-full h-64 mb-4">
         <img
           src={item.ImgURL}
           alt={item.name}
-          className=" w-full h-full object-cover select-none"
+          className="w-full h-full object-cover select-none"
         />
       </div>
-      <hr className=" "></hr>
+      <hr className=" " />
       <div className="flex flex-1 mt-2 ">
         <div className="flex flex-col w-full justify-between ">
           <div>
             <div className="flex justify-between ">
-              <p className="sm: tracking-wide text-md font-bold uppercase truncate">
+              <p className="tracking-wide text-md font-bold uppercase truncate">
                 {item.name}
               </p>
-              <p className="sm: tracking-widest text-md font-semibold uppercase mr-1 select-none">
+              <p className="tracking-widest text-md font-semibold uppercase mr-1 select-none">
                 {item.size}
               </p>
             </div>

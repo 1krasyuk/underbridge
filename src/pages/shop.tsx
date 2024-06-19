@@ -1,13 +1,14 @@
-import Header from '@/layout/header/header'
-import Footer from '@/layout/footer/footer'
 import { useEffect, useState } from 'react'
-import ClothingItem, { TClothingItem } from '@/widgets/home/ClothingItem'
-import SearchBar from '@/widgets/home/SearchBar'
-import useSearchItems from '@/widgets/home/useSearchItems'
+
 import { useSearchParams } from 'react-router-dom'
 
-import SizeFilter from '@/widgets/home/SizeFilter' // Импортируем компонент Filter
+import Footer from '@/layout/footer/footer'
+import Header from '@/layout/header/header'
 import BrandFilter from '@/widgets/home/BrandFilter'
+import ClothingItem, { TClothingItem } from '@/widgets/home/ClothingItem'
+import SearchBar from '@/widgets/home/SearchBar'
+import SizeFilter from '@/widgets/home/SizeFilter' // Импортируем компонент Filter
+import useSearchItems from '@/widgets/home/useSearchItems'
 
 export default function Shop() {
   const { filteredClothingData, searchItems } = useSearchItems()
@@ -27,7 +28,7 @@ export default function Shop() {
   }
 
   return (
-    <div className="flex-1 container w-2/3 grid grid-cols-[1fr_3fr] gap-4 mt-24">
+    <div className="flex-1 container grid grid-cols-[1fr_3fr] gap-4 mt-24">
       <div>
         <SizeFilter />
         <BrandFilter />

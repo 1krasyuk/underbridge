@@ -20,23 +20,21 @@ const CategoryName = [
 
 const CategoriesList: React.FC = () => {
   return (
-    <div className="grid sm:grid-cols-3 grid-cols-6 gap-3 mb-12">
+    <div className="grid lg:grid-cols-3 grid-cols-6 gap-3 mb-12">
       {imagePaths.map((imagePath, index) => (
-        <div key={index} className=" text-center">
+        <div key={index} className="w-full text-center">
           <Link to="/shop">
             <img
               key={imagePath}
               src={`/images/home/categories/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
-              className="h-64 w-52 mb-4 object-cover"
+              className="h-64 w-full mb-4 object-cover"
             />
           </Link>
 
-          <Link to="/shop">
-            <span className="text-lg  font-semibold tracking-tight">
-              {CategoryName[index]}
-            </span>
-          </Link>
+          <span className="text-lg  font-semibold tracking-tight">
+            {CategoryName[index]}
+          </span>
         </div>
       ))}
     </div>

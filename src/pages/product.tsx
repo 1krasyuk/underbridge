@@ -1,26 +1,20 @@
-import { Button } from '@/components/ui/button'
-import { addCartItem, deleteCartItem, selectCartItems } from '@/store/cartSlice'
-import { useAppDispatch, useAppSelector } from '@/lib'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+import { cx } from 'class-variance-authority'
+import { db } from 'firebase'
 import {
   collection,
-  query,
-  where,
-  getDocs,
   DocumentData,
-  QueryDocumentSnapshot
+  getDocs,
+  query,
+  QueryDocumentSnapshot,
+  where
 } from 'firebase/firestore'
-import { db } from 'firebase'
-import { useEffect, useState } from 'react'
-import { TClothingItem } from '@/widgets/home/ClothingItem'
 import { Heart } from 'lucide-react'
-import LikeButton from '@/widgets/home/LikeButton'
-import {
-  selectFavouriteItems,
-  addFavouriteItem,
-  deleteFavouriteItem
-} from '@/store/favouriteSlice'
+import { useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 
+import { Button } from '@/components/ui/button'
 import {
   Carousel,
   CarouselContent,
@@ -28,9 +22,15 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import { toast } from 'sonner'
-
-import { cx } from 'class-variance-authority'
+import { useAppDispatch, useAppSelector } from '@/lib'
+import { addCartItem, deleteCartItem, selectCartItems } from '@/store/cartSlice'
+import {
+  addFavouriteItem,
+  deleteFavouriteItem,
+  selectFavouriteItems
+} from '@/store/favouriteSlice'
+import { TClothingItem } from '@/widgets/home/ClothingItem'
+import LikeButton from '@/widgets/home/LikeButton'
 
 export default function Product() {
   const dispatch = useAppDispatch()
@@ -98,7 +98,7 @@ export default function Product() {
   }
 
   return (
-    <div className="grid grid-cols-[2.5fr_1fr] container w-2/3 mt-28">
+    <div className="grid grid-cols-[2.5fr_1fr] container mt-28">
       <div className="flex justify-center">
         <Carousel>
           <CarouselContent>
@@ -157,7 +157,7 @@ export default function Product() {
             className={cx(
               'h-12 w-max border-5   border-black hover:border-red-500 hover:bg-white',
               {
-                ['border-red-500']: isLiked
+                'border-red-500': isLiked
               }
             )}
             onClick={likeHandler}

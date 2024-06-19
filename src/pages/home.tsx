@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react'
+
+import { collection, getDocs, getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
+import { Link } from 'react-router-dom'
+
 import {
   Carousel,
   CarouselContent,
@@ -7,15 +11,9 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import Header from '@/layout/header/header'
-import Footer from '@/layout/footer/footer'
-import CategoriesList from '@/widgets/home/category'
 import BrandsList from '@/widgets/home/brandsWidget'
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
-import { getStorage, ref, getDownloadURL } from 'firebase/storage'
-import ClothingItem from '@/widgets/home/ClothingItem'
-import { TClothingItem } from '@/widgets/home/ClothingItem'
-import { Link } from 'react-router-dom'
+import CategoriesList from '@/widgets/home/category'
+import ClothingItem, { TClothingItem } from '@/widgets/home/ClothingItem'
 
 export default function Home() {
   const [clothingData, setClothingData] = useState<TClothingItem[]>([])
@@ -52,7 +50,7 @@ export default function Home() {
   }, [db, storage])
 
   return (
-    <div className=" sm:w-full container w-2/3 flex flex-col mt-7">
+    <div className="sm:w-full relative container flex flex-col mt-7">
       <div className="">
         <p className=" my-4 text-left tracking-wide  text-base font-medium uppercase">
           Категории
@@ -77,7 +75,7 @@ export default function Home() {
         <BrandsList />
       </div>
 
-      <div>
+      <div className="flex flex-col">
         <div className=" mt-10 flex justify-between">
           <p className="sm:my-0 sm:tracking-tight sm:text-2xl my-4 text-left tracking-wide text-base font-medium uppercase">
             Новинки
@@ -89,10 +87,10 @@ export default function Home() {
           </Link>
         </div>
 
-        <Carousel className=" w-full ">
-          <CarouselContent className="">
+        <Carousel className="w-[calc(100%-90px)] grid grid-cols-1 self-center">
+          <CarouselContent className="grid auto-cols-max grid-flow-col">
             {clothingData.map((item) => (
-              <CarouselItem className=" basis-1/6 ml-2" key={item.id}>
+              <CarouselItem key={item.id}>
                 <ClothingItem item={item} />
               </CarouselItem>
             ))}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 
 const brandsAndDesigners = [
@@ -93,7 +94,7 @@ const BrandsList: React.FC = () => {
         placeholder="Поиск..."
       />
 
-      <div className="grid w-2/3 grid-cols-3 gap-x-24 gap-y-6">
+      <div className="grid  grid-cols-3 gap-x-24 gap-y-6">
         {filteredBrands.map((brand, index) => (
           <button
             key={index}

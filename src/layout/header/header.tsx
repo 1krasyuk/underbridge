@@ -1,6 +1,13 @@
-import { Heart, Search, ShoppingBag, User as UserIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { getAuth, User } from 'firebase/auth'
+import { Heart, Search, ShoppingBag, User as UserIcon } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -9,12 +16,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
 import {
   Form,
   FormControl,
@@ -24,8 +25,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
-
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import { Input } from '@/components/ui/input'
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null)
@@ -59,7 +59,7 @@ export default function Header() {
   }
 
   return (
-    <div className="container w-2/3 flex flex-col uppercase select-none">
+    <div className="container flex flex-col uppercase select-none">
       <div className="flex flex-row justify-between">
         <Link to="/">
           <p className="font-bold  tracking-widest sm:text-2xl text-3xl my-2 text-red-500">
