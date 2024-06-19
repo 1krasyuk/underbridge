@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function About() {
   return (
-    <div className="h-screen container flex items-center mr-20">
+    <div className="container flex items-center mr-20">
       <img
         src="public\images\header\UNDERBRIDGE LOGO.png"
         className="w-2/6 rounded-full shadow-xl select-none"

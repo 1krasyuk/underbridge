@@ -112,7 +112,10 @@ export function SignUpForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-2/5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="sm:w-5/6 space-y-8 w-2/5"
+      >
         <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}

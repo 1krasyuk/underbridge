@@ -7,14 +7,14 @@ import Footer from '@/layout/footer/footer'
 
 export default function SignInPage() {
   return (
-    <div className="container mx-auto  flex flex-col justify-center items-center h-full ">
+    <div className="sm: container mx-auto  flex flex-col justify-center items-center h-full ">
       <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl my-6">
         ВОЙТИ
       </h1>
 
       <SignInForm />
 
-      <p className="my-4 text-right tracking-tight text-base font-medium">
+      <p className=" my-4 text-right tracking-tight text-base font-medium">
         Еще нет аккаунта?
         <Link
           to="/sign-up"

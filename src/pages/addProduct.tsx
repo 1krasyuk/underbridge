@@ -46,7 +46,7 @@ export default function AddProduct() {
   }, [])
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className=" flex items-center justify-center w-full">
       <Card className="w-[600px] mt-10">
         <CardHeader>
           <CardTitle>Добавить товар</CardTitle>

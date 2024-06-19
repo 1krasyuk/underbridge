@@ -28,7 +28,7 @@ const CategoriesList: React.FC = () => {
               key={imagePath}
               src={`/images/home/categories/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
-              className="h-64 w-full mb-4 object-cover"
+              className="sm:h-48 h-64 w-full mb-4 object-cover"
             />
           </Link>
 

@@ -50,9 +50,9 @@ export default function Home() {
   }, [db, storage])
 
   return (
-    <div className="sm:w-full relative container flex flex-col mt-7">
+    <div className="sm:w-full sm:mt-5 relative container flex flex-col mt-7">
       <div className="">
-        <p className=" my-4 text-left tracking-wide  text-base font-medium uppercase">
+        <p className="sm:text-center sm:text-3xl sm:mb-10 my-4 text-left tracking-wide  text-base font-medium uppercase">
           Категории
         </p>
 
@@ -61,7 +61,7 @@ export default function Home() {
 
       <div>
         <div className=" flex justify-between">
-          <p className=" sm:tracking-tight my-4 text-left tracking-wide text-base font-medium uppercase">
+          <p className="sm:text-lg sm:tracking-tight my-4 text-left tracking-wide text-base font-medium uppercase">
             Бренды и дизайнеры
           </p>
 
@@ -76,8 +76,8 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col">
-        <div className=" mt-10 flex justify-between">
-          <p className="sm:my-0 sm:tracking-tight sm:text-2xl my-4 text-left tracking-wide text-base font-medium uppercase">
+        <div className="mt-10 flex justify-between items-center">
+          <p className="sm:text-lg sm:my-0 sm:tracking-tight  my-4 text-left tracking-wide text-base font-medium uppercase">
             Новинки
           </p>
           <Link to="/shop">

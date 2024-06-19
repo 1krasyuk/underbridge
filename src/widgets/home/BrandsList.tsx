@@ -79,7 +79,7 @@ const BrandsList: React.FC = () => {
                 key={imagePath}
                 src={`public/images/home/brands/${imagePath}`}
                 alt={`Картинка ${index + 1}`}
-                className="w-40  shadow-lg"
+                className=" w-40  shadow-lg"
               />
             </Link>
           </div>
@@ -94,7 +94,7 @@ const BrandsList: React.FC = () => {
         placeholder="Поиск..."
       />
 
-      <div className="grid  grid-cols-3 gap-x-24 gap-y-6">
+      <div className="sm:gap-x-2 sm:mx-2 grid  grid-cols-3 gap-x-24 gap-y-6">
         {filteredBrands.map((brand, index) => (
           <button
             key={index}

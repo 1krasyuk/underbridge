@@ -2,18 +2,21 @@ import { useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import Footer from '@/layout/footer/footer'
-import Header from '@/layout/header/header'
 import BrandFilter from '@/widgets/home/BrandFilter'
 import ClothingItem, { TClothingItem } from '@/widgets/home/ClothingItem'
-import SearchBar from '@/widgets/home/SearchBar'
 import SizeFilter from '@/widgets/home/SizeFilter' // Импортируем компонент Filter
 import useSearchItems from '@/widgets/home/useSearchItems'
+import { Button } from '@/components/ui/button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Shop() {
   const { filteredClothingData, searchItems } = useSearchItems()
   const [filteredProducts, setFilteredProducts] = useState<TClothingItem[]>([])
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const resetFilter = () => {
+    navigate('/shop')
+  }
 
   useEffect(() => {
     const searchQuery = searchParams.get('search')
@@ -28,12 +31,15 @@ export default function Shop() {
   }
 
   return (
-    <div className="flex-1 container grid grid-cols-[1fr_3fr] gap-4 mt-24">
-      <div>
+    <div className="flex-1 sm:grid-cols-1 sm:grid-rows-auto container grid grid-cols-[1fr_3fr] gap-4 sm:mt-12 mt-24">
+      <div className="space-y-7">
         <SizeFilter />
         <BrandFilter />
+        <Button onClick={resetFilter} className="w-full">
+          Сбросить фильтры
+        </Button>
       </div>
-      <div className="grid grid-cols-4 gap-6 auto-rows-max">
+      <div className="grid sm:grid-cols-2 grid-cols-4 gap-6 auto-rows-max">
         {filteredClothingData.map((item) => (
           <ClothingItem key={item.id} item={item} />
         ))}

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function SignUpPage() {
   return (
     <div className="container mx-auto  flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold my-8 tracking-wider">
+      <h1 className="text-4xl font-bold my-8 tracking-wider text-center ">
         СОЗДАНИЕ АККАУНТА
       </h1>
 

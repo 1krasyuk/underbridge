@@ -11,7 +11,7 @@ export default function CheckoutPage() {
   const cartItems = useAppSelector(selectCartItems)
 
   return (
-    <div className="  flex flex-col bg-gradient-to-r from-white from-50% to-gray-100 to-50%">
+    <div className=" flex flex-col  sm:bg-none bg-gradient-to-r from-white from-50% to-gray-100 to-50%">
       <div className="bg-white">
         <div className="container flex-row justify-between bg-white">
           <Link to="/">
@@ -39,15 +39,15 @@ export default function CheckoutPage() {
       </div>
       <hr></hr>
 
-      <div className="container grid grid-cols-2  justify-center ">
-        <div className="pr-10">
+      <div className="container grid sm:grid-cols-1 grid-cols-2  justify-center ">
+        <div className="sm:pr-0 pr-10">
           <h1 className="text-4xl font-semibold my-8 tracking-wider text-center">
-            Быстрая оплата
+            Оформление заказа
           </h1>
 
           <CheckoutForm />
 
-          <p className="my-4 tracking-tight text-base font-medium ">
+          <p className="my-4 tracking-tight text-base font-medium text-center ">
             Уже есть аккаунт?
             <Link
               to="/sign-in"
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
             </Link>
           </p>
         </div>
-        <div>
+        <div className="sm:hidden">
           {cartItems.map((item) => (
             <img
               src={item.ImgURL}

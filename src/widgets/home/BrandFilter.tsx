@@ -8,9 +8,7 @@ import {
   DocumentData
 } from 'firebase/firestore'
 import { db } from 'firebase' // Замените на ваш файл конфигурации Firebase
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@radix-ui/react-label'
-import useSearchItems from './useSearchItems'
 import { useSearchParams } from 'react-router-dom'
 import {
   Select,
@@ -21,13 +19,6 @@ import {
   SelectGroup,
   SelectLabel
 } from '@/components/ui/select'
-import { Checkbox } from '@/components/ui/checkbox'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
 
 interface Product {
   id: string

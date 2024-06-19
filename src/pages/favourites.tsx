@@ -24,7 +24,7 @@ export default function Favourites() {
       </p>
       {/* <SearchBar onSearch={handleSearch} className="" /> */}
       <div className="flex-1 container grid gap-4">
-        <div className="grid grid-cols-6 gap-6 auto-rows-max">
+        <div className="grid sm:grid-cols-2 grid-cols-6 gap-6 auto-rows-max">
           {favouriteItems.map((item) => (
             <ClothingItem key={item.id} item={item} />
           ))}

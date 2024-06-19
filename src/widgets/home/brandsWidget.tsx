@@ -11,7 +11,7 @@ const imagePaths = [
 
 const CategoriesList: React.FC = () => {
   return (
-    <div className="grid sm:order-3 grid-cols-6 gap-4 mb-6">
+    <div className="grid lg:grid-cols-3 sm:order-3 grid-cols-6 gap-4 mb-6">
       {/* Используем функцию map для рендеринга каждой картинки */}
 
       {imagePaths.map((imagePath, index) => (
@@ -21,7 +21,7 @@ const CategoriesList: React.FC = () => {
               key={imagePath}
               src={`/images/home/brands/${imagePath}`}
               alt={`Картинка ${imagePath + 1}`}
-              className="shadow-2xl"
+              className=" shadow-2xl"
             />
           </Link>
         </div>

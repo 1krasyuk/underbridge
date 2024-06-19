@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function Admin() {
   return (
-    <div className="h-screen">
+    <div className="">
       <p>RIP to me frfr</p>
     </div>
   )

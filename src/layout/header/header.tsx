@@ -59,8 +59,8 @@ export default function Header() {
   }
 
   return (
-    <div className="container flex flex-col uppercase select-none">
-      <div className="flex flex-row justify-between">
+    <div className="container flex flex-col w-full uppercase select-none">
+      <div className=" flex  flex-row justify-between">
         <Link to="/">
           <p className="font-bold  tracking-widest sm:text-2xl text-3xl my-2 text-red-500">
             UNDERBRIDGE
@@ -76,9 +76,9 @@ export default function Header() {
                 className="cursor-pointer focus:outline-none transition-transform duration-100 transform-gpu hover:scale-150 "
               />
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:w-5/6 ">
               <DialogHeader>
-                <DialogTitle className="mb-2">Поиск</DialogTitle>
+                <DialogTitle className=" mb-2">Поиск</DialogTitle>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
@@ -130,7 +130,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="flex flex-row justify-between border-y-2 tracking-widest text-sm font-bold ">
+      <div className="sm:hidden flex flex-row justify-between border-y-2 tracking-widest text-sm font-bold ">
         <p className="my-4 text-right  ">
           <Link to="/brands"> Бренды </Link>
         </p>
