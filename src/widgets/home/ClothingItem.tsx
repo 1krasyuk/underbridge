@@ -23,8 +23,8 @@ interface ClothingItemProps {
 
 const ClothingItem: React.FC<ClothingItemProps> = ({ item }) => {
   return (
-    <div className="w-48 flex flex-col p-1 h-full border-2 border-transparent transition-all duration-500 hover:border-black relative">
-      <div className="w-full h-64 mb-4">
+    <div className="sm:border-none sm:pr-3 w-full flex flex-col p-1 h-full  border-2 border-transparent transition-all duration-500 hover:border-black relative">
+      <div className="sm:space-x-1 w-full h-64 mb-4">
         <img
           src={item.ImgURL}
           alt={item.name}
@@ -36,19 +36,19 @@ const ClothingItem: React.FC<ClothingItemProps> = ({ item }) => {
         <div className="flex flex-col w-full justify-between ">
           <div>
             <div className="flex justify-between ">
-              <p className="tracking-wide text-md font-bold uppercase truncate">
+              <p className="sm:text-md tracking-wide text-lg font-bold uppercase truncate">
                 {item.name}
               </p>
-              <p className="tracking-widest text-md font-semibold uppercase mr-1 select-none">
+              <p className="tracking-widest text-lg font-semibold uppercase mr-1 select-none">
                 {item.size}
               </p>
             </div>
-            <p className="sm:text-xl tracking-widest text-sm font-semibold uppercase">
+            <p className="sm:text-sm tracking-widest text-sm font-semibold uppercase">
               {item.brand}
             </p>
           </div>
           <div className="flex justify-between items-end">
-            <p className="sm:text-xl tracking-wider text-md font-bold uppercase select-none">
+            <p className="sm:text-sm tracking-wider text-md font-bold uppercase select-none">
               {item.price} ₽
             </p>
             <LikeButton cardItem={item} />

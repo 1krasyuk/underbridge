@@ -6,7 +6,7 @@ import BrandsList from '@/widgets/home/BrandsList'
 export default function Cart() {
   return (
     <div>
-      <p className="tracking-wide text-3xl font-bold uppercase mx-auto mt-10 text-center">
+      <p className="sm:text-2xl tracking-wide text-3xl font-bold uppercase mx-auto mt-10 text-center">
         Бренды и дизайнеры
       </p>
       <BrandsList />

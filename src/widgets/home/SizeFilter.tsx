@@ -44,14 +44,14 @@ const SizeFilter = () => {
   const size = searchParams.get('size') ?? ''
 
   return (
-    <div className="select-none">
-      <Label>РАЗМЕРЫ</Label>
+    <div className="select-none font-semibold">
+      <Label>Размер</Label>
       <RadioGroup
         onValueChange={sizeFilterHandler}
         value={size}
-        className="flex space-x-4"
+        className="flex space-x-4 mt-2"
       >
-        <div className="flex flex-col items-center space-y-2 ml-2">
+        <div className="flex flex-col items-center space-y-2">
           <Label htmlFor="XS">XS</Label>
           <RadioGroupItem value="XS" id="XS" />
         </div>

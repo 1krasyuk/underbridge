@@ -16,7 +16,7 @@ const CategoriesList: React.FC = () => {
 
       {imagePaths.map((imagePath, index) => (
         <div key={index} className="">
-          <Link to="/shop">
+          <Link to="/brands">
             <img
               key={imagePath}
               src={`/images/home/brands/${imagePath}`}

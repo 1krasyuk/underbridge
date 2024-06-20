@@ -4,10 +4,10 @@ import {
   getDocs,
   collection,
   query,
-  where
+  where,
+  or
 } from 'firebase/firestore'
 
-import { getStorage } from 'firebase/storage'
 import { TClothingItem } from './ClothingItem'
 
 const useSearchItems = () => {
@@ -16,12 +16,42 @@ const useSearchItems = () => {
     TClothingItem[]
   >([])
   const db = getFirestore()
-  const storage = getStorage()
 
-  const searchItems = async (search: string, size?: string) => {
-    const q = size
-      ? query(collection(db, 'products'), where('size', '==', size))
-      : query(collection(db, 'products'))
+  const searchItems = async ({
+    search,
+    size,
+    category,
+    color,
+    brand
+  }: {
+    search: string
+    size?: string
+    category?: string
+    color?: string
+    brand?: string
+  }) => {
+    let q = collection(db, 'products')
+
+    if (size) {
+      // @ts-ignore
+      q = query(q, where('size', '==', size))
+    }
+
+    if (category) {
+      // @ts-ignore
+      q = query(q, where('category', '==', category))
+    }
+
+    if (brand) {
+      // @ts-ignore
+      q = query(q, where('brand', '==', brand))
+    }
+
+    if (color) {
+      // @ts-ignore
+      q = query(q, where('color', '==', color))
+    }
+
     const querySnapshot = await getDocs(q)
 
     const data: TClothingItem[] = []
@@ -40,10 +70,6 @@ const useSearchItems = () => {
 
     setFilteredClothingData(filteredItems)
   }
-
-  useEffect(() => {
-    searchItems('')
-  }, [db, storage])
 
   return { filteredClothingData, searchItems }
 }

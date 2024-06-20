@@ -87,10 +87,10 @@ export default function Home() {
           </Link>
         </div>
 
-        <Carousel className="w-[calc(100%-90px)] grid grid-cols-1 self-center">
+        <Carousel className="w-[calc(100%-90px)]  grid grid-cols-1 self-center">
           <CarouselContent className="grid auto-cols-max grid-flow-col">
             {clothingData.map((item) => (
-              <CarouselItem key={item.id}>
+              <CarouselItem className="w-48" key={item.id}>
                 <ClothingItem item={item} />
               </CarouselItem>
             ))}

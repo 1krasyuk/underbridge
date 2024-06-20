@@ -1,9 +1,8 @@
 import { useState } from 'react'
-
 import { Link } from 'react-router-dom'
 
 const brandsAndDesigners = [
-  'Gucci',
+  { name: 'Gucci', slug: 'Gucci' },
   'Chanel',
   'Balenciaga',
   'Prada',
@@ -61,27 +60,25 @@ const imagePaths = [
 const BrandsList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('')
 
-  const filteredBrands = brandsAndDesigners.filter((brand) =>
-    brand.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredBrands = brandsAndDesigners.filter((brand) => {
+    const brandName = typeof brand === 'string' ? brand : brand.name
+    return brandName.toLowerCase().includes(searchTerm.toLowerCase())
+  })
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
   return (
-    <div className="flex flex-col items-center select-none">
-      <div className="flex">
+    <div className="flex flex-col items-center select-none ">
+      <div className="sm:grid sm:grid-rows-2 sm:grid-cols-3 flex">
         {imagePaths.map((imagePath, index) => (
           <div key={index} className="flex flex-col justify-evenly mx-4 my-7">
-            <Link to="/shop">
-              <img
-                key={imagePath}
-                src={`public/images/home/brands/${imagePath}`}
-                alt={`Картинка ${index + 1}`}
-                className=" w-40  shadow-lg"
-              />
-            </Link>
+            <img
+              src={`images/home/brands/${imagePath}`}
+              alt={`Картинка ${index + 1}`}
+              className="sm:w-28 w-40 shadow-lg"
+            />
           </div>
         ))}
       </div>
@@ -90,19 +87,25 @@ const BrandsList: React.FC = () => {
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
-        className="border border-gray-300 rounded-md p-2 m-10 w-1/3"
+        className="sm:w-2/3 border border-gray-300 rounded-md p-2 m-10 w-1/3"
         placeholder="Поиск..."
       />
+      <div className="sm:gap-x-2 sm:mx-2 grid grid-cols-3 gap-x-24 gap-y-6">
+        {filteredBrands.map((brand, index) => {
+          const brandName = typeof brand === 'string' ? brand : brand.name
+          const brandSlug =
+            typeof brand === 'string' ? brand.replace(/ /g, '+') : brand.slug
 
-      <div className="sm:gap-x-2 sm:mx-2 grid  grid-cols-3 gap-x-24 gap-y-6">
-        {filteredBrands.map((brand, index) => (
-          <button
-            key={index}
-            className="text-xl  border border-gray-300 rounded-md p-2 w-46 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:border-gray-500"
-          >
-            {brand}
-          </button>
-        ))}
+          return (
+            <Link
+              to={`/shop?brand=${brandSlug}`}
+              key={index}
+              className=" grid sm:text-lg  text-xl border border-gray-300 text-center items-center rounded-md p-2 w-46 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:border-gray-500"
+            >
+              <button className="">{brandName}</button>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

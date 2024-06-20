@@ -28,16 +28,15 @@ interface Product {
   brand: string // Предполагается, что каждый товар имеет поле размера
   // Другие поля товара
 }
+import getColorsList from './getColorsList'
 
-const BrandFilter = () => {
+const ColorFilter = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [brandsAndDesignersList, setBrandsAndDesignersList] = useState<any[]>(
-    []
-  )
+  const [ColorsList, setColorsList] = useState<any[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
 
   const handleButtonClick = async () => {
-    const q = query(collection(db, 'products'), where('brand', '==', 'S'))
+    const q = query(collection(db, 'products'), where('color', '==', 'S'))
     const querySnapshot = await getDocs(q)
 
     const products: Product[] = []
@@ -55,17 +54,17 @@ const BrandFilter = () => {
     setFilteredProducts(products)
   }
 
-  const brandFilterHandler = (value: string) => {
-    searchParams.set('brand', value)
+  const colorFilterHandler = (value: string) => {
+    searchParams.set('color', value)
     setSearchParams(searchParams)
   }
 
-  const brand = searchParams.get('brand') ?? ''
+  const color = searchParams.get('color') ?? ''
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getBrandsAndDesignersList()
-      setBrandsAndDesignersList(data.map((item: DocumentData) => item.name))
+      const data = await getColorsList()
+      setColorsList(data.map((item: DocumentData) => item.name))
     }
 
     fetchData()
@@ -74,15 +73,15 @@ const BrandFilter = () => {
   return (
     <div>
       <div className="flex flex-col space-y-1.5 font-semibold">
-        <Label htmlFor="brand">Бренд</Label>
-        <Select onValueChange={brandFilterHandler}>
-          <SelectTrigger id="brand">
-            <SelectValue placeholder="Выберите бренд" />
+        <Label htmlFor="color">Цвет</Label>
+        <Select onValueChange={colorFilterHandler}>
+          <SelectTrigger id="color">
+            <SelectValue placeholder="Выберите цвет" />
           </SelectTrigger>
           <SelectContent position="popper">
-            {brandsAndDesignersList.map((brand, index) => (
-              <SelectItem id={brand} key={index} value={brand}>
-                {brand}
+            {ColorsList.map((color, index) => (
+              <SelectItem id={color} key={index} value={color}>
+                {color}
               </SelectItem>
             ))}
           </SelectContent>
@@ -92,4 +91,4 @@ const BrandFilter = () => {
   )
 }
 
-export default BrandFilter
+export default ColorFilter

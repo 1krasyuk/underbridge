@@ -10,8 +10,6 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import Footer from '@/layout/footer/footer'
-import Header from '@/layout/header/header'
 import { useAppDispatch, useAppSelector } from '@/lib'
 import { clearCart, deleteCartItem, selectCartItems } from '@/store/cartSlice'
 
@@ -36,11 +34,11 @@ export default function Cart() {
           </Link>
         </div>
 
-        <Table className="text-lg ">
+        <Table className="sm:text-base text-lg ">
           <TableHeader>
             <TableRow>
-              <TableHead className="">Товар</TableHead>
-              <TableHead>Описание</TableHead>
+              <TableHead className="sm:px-0 px-16">Товар</TableHead>
+              <TableHead className="sm:px-0 px-20">Описание</TableHead>
               <TableHead className="sm:hidden text-center">
                 Количество
               </TableHead>
@@ -50,14 +48,14 @@ export default function Cart() {
           <TableBody>
             {cartItems.map((item) => (
               <TableRow key={item.name}>
-                <TableCell className="">
+                <TableCell className="px-0">
                   <img
                     src={item.ImgURL}
                     alt={item.name}
-                    className="sm:h-32  h-64 w-48 object-cover "
+                    className="sm:h-36 sm:w-full h-64 w-48 object-cover "
                   />
                 </TableCell>
-                <TableCell className="sm:space-y-2">
+                <TableCell className="sm:px-2 px-20 sm:space-y-2">
                   <div className="font-bold sm:text-sm"> {item.name} </div>
                   <div className="font-bold sm:text-sm ">{item.brand}</div>
                   <div className="font-bold sm:text-sm"> {item.size}</div>
@@ -87,13 +85,13 @@ export default function Cart() {
               </TableFooter> */}
         </Table>
       </div>
-      <div className="col-span-1 font-bold text-3xl mx-6  sm:mt-10 mt-28">
+      <div className="sm:text-2xl col-span-1 font-bold text-3xl sm:mx-0 mx-6  sm:mt-6 mt-28">
         Всего: ₽{summ}
         <Link to="/checkout">
-          <Button className="mt-10 w-full">Оформить заказ</Button>
+          <Button className="sm:mt-6 mt-10 w-full">Оформить заказ</Button>
         </Link>
       </div>
-      <div className="sm:mx-6">
+      <div className="sm:mx-0">
         <Button
           className="sm:w-full  w-48 mt-5"
           onClick={() => dispatch(clearCart())}

@@ -59,7 +59,7 @@ export default function Header() {
   }
 
   return (
-    <div className="container flex flex-col w-full uppercase select-none">
+    <div className=" container flex flex-col w-full uppercase select-none">
       <div className=" flex  flex-row justify-between">
         <Link to="/">
           <p className="font-bold  tracking-widest sm:text-2xl text-3xl my-2 text-red-500">
@@ -67,7 +67,7 @@ export default function Header() {
           </p>
         </Link>
 
-        <div className="flex flex-row justify-between items-center space-x-5 ">
+        <div className="sm:ml-5 sm:space-x-2 flex flex-row justify-between items-center space-x-5 ">
           <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
             <DialogTrigger>
               <Search

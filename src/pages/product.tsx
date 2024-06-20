@@ -98,15 +98,15 @@ export default function Product() {
   }
 
   return (
-    <div className="grid grid-cols-[2.5fr_1fr] container mt-28">
-      <div className="flex justify-center">
+    <div className="sm:grid-cols-1 sm:grid-rows-2  sm:mt-10 grid grid-cols-[2.5fr_1fr] container mt-28">
+      <div className=" flex justify-center">
         <Carousel>
           <CarouselContent>
             <CarouselItem className="  ">
               <img
                 src={product.ImgURL}
                 alt={product.name}
-                className="w-full h-[550px]  object-cover  select-none"
+                className="sm:self-center sm:mx-auto sm:w-5/6 sm:h-full w-full h-[550px]  object-cover "
               />
             </CarouselItem>
             {/* <CarouselItem>..lfkjhgofdlgdf.</CarouselItem>
@@ -114,11 +114,11 @@ export default function Product() {
           </CarouselContent>
         </Carousel>
       </div>
-      <div className="flex flex-col mt-10  ">
-        <div className="tracking-wide text-2xl font-semibold  underline mb-8">
+      <div className="sm:mt-10 sm:mb-0 flex flex-col mt-10  ">
+        <div className="sm:text-xl sm:mb-2 tracking-wide text-2xl font-semibold  underline mb-8">
           {product.name}
         </div>
-        <div className="space-y-2 mb-8">
+        <div className="sm:mb-4 sm:space-y-0 space-y-2 mb-8">
           <div className="tracking-wide text-xl   ">Бренд: {product.brand}</div>
           <div className="tracking-wide text-xl   ">Размер: {product.size}</div>
           <div className="tracking-wide text-xl  ">Цвет: {product.color}</div>

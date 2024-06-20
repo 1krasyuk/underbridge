@@ -4,9 +4,8 @@ import { Heart, Search, ShoppingBag, User as UserIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAppSelector } from '@/lib'
 import { selectCartItems } from '@/store/cartSlice'
-import Footer from '@/layout/footer/footer'
 import { Link } from 'react-router-dom'
-
+import { TableCell } from '@/components/ui/table'
 export default function CheckoutPage() {
   const cartItems = useAppSelector(selectCartItems)
 
@@ -15,7 +14,7 @@ export default function CheckoutPage() {
       <div className="bg-white">
         <div className="container flex-row justify-between bg-white">
           <Link to="/">
-            <p className="font-bold tracking-widest text-3xl my-2 text-red-500">
+            <p className="sm:text-2xl font-bold tracking-widest text-3xl my-2 text-red-500">
               UNDERBRIDGE
             </p>
           </Link>
@@ -41,7 +40,7 @@ export default function CheckoutPage() {
 
       <div className="container grid sm:grid-cols-1 grid-cols-2  justify-center ">
         <div className="sm:pr-0 pr-10">
-          <h1 className="text-4xl font-semibold my-8 tracking-wider text-center">
+          <h1 className="sm:text-2xl text-4xl font-semibold my-8 tracking-wider text-center">
             Оформление заказа
           </h1>
 
@@ -57,13 +56,22 @@ export default function CheckoutPage() {
             </Link>
           </p>
         </div>
+
         <div className="sm:hidden">
           {cartItems.map((item) => (
-            <img
-              src={item.ImgURL}
-              alt={item.name}
-              className="ml-10 h-32 w-24 object-cover my-4"
-            />
+            <div className="flex gap-0 ml-10 my-4">
+              <img
+                src={item.ImgURL}
+                alt={item.name}
+                className=" h-48 w-36 object-cover "
+              />
+              <div className="ml-5">
+                <div className="font-bold sm:text-sm"> {item.name} </div>
+                <div className=" sm:text-sm ">{item.brand}</div>
+                <div className=" sm:text-sm"> {item.size}</div>
+                <div>₽ {item.price} </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
