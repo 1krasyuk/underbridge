@@ -12,13 +12,13 @@ export default function CheckoutPage() {
   return (
     <div className=" flex flex-col  sm:bg-none bg-gradient-to-r from-white from-50% to-gray-100 to-50%">
       <div className="bg-white">
-        <div className="container flex-row justify-between bg-white">
+        <div className="flex container flex-row justify-between bg-white">
           <Link to="/">
             <p className="sm:text-2xl font-bold tracking-widest text-3xl my-2 text-red-500">
               UNDERBRIDGE
             </p>
           </Link>
-          <div className="flex-row justify-between items-center space-x-5 ">
+          <div className="flex flex-row justify-between items-center space-x-5 ">
             <Link to="/cart">
               <ShoppingBag
                 size={26}
